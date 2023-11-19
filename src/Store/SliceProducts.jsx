@@ -9,7 +9,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 
 export const getProductApi = createAsyncThunk("products/getProductApi", async (_, thunkAPI) => {
-
   const {rejectWithValue} = thunkAPI
   try {
     const res = await fetch("http://localhost:6004/product")
@@ -19,6 +18,25 @@ export const getProductApi = createAsyncThunk("products/getProductApi", async (_
     rejectWithValue(error.message)
   }
 })
+
+
+export const postProduct = createAsyncThunk(
+  "products/postProduct",
+  async (element, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+      await fetch(`http://localhost:3003/heros/${element.id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+        },
+      });
+      return element;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 const productSlice = createSlice({
   name: "products",

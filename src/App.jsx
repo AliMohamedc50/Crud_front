@@ -11,16 +11,9 @@ import Outputs from "./Components/Outputs";
 function App() {
 
   const dispach = useDispatch()
-
-  // const {}
-
-  const { getProduct } = useSelector((state) => state.productSlice);
-
   useEffect(() => {
     dispach(getProductApi());
   }, [dispach]);
-  
-// console.log(getProduct);
 
   return (
     <>

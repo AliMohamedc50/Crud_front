@@ -1,7 +1,48 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
+import { useSelector } from 'react-redux';
 
 function Outputs() {
+
+
+
+      const { getProduct } = useSelector((state) => state.productSlice);
+    //   console.log(getProduct);
+
+
+    const product =
+      getProduct &&
+      getProduct.map((product) => (
+        <tr key={product.id} className="border-y-2 border-slate-400 ">
+          <td>{product.id}</td>
+          <td>{product.title}</td>
+          <td>{product.price}</td>
+          <td>{product.texes}</td>
+          <td>{product.ads}</td>
+          <td>{product.discount}</td>
+          <td>{product.total}</td>
+          <td>{product.categore}</td>
+          <td>{product.count}</td>
+          {/* <td>
+            <button className='bg-red-600 hover:bg-red-900 text-xl rounded-md  p-1' id="update">update</button>
+          </td> */}
+          <td>
+            <button
+              className="bg-red-600 hover:bg-red-900 text-xl rounded-md  p-1"
+              id="delete"
+            >
+              delete
+            </button>
+          </td>
+        </tr>
+      ));
+
+
+
+
+
+
+
   return (
     <div className="outputs">
       <div className="searchBlock">
@@ -13,10 +54,10 @@ function Outputs() {
         />
       </div>
       <div className="btnSearch">
-        <button className="bg-teal-800 m-1" id="searchTitle">
+        <button className="bg-teal-800 m-1 p-2" id="searchTitle">
           Search By Title
         </button>
-        <button className="bg-teal-800 m-1" id="searchCategory">
+        <button className="bg-teal-800 m-1 p-2" id="searchCategory">
           Search By Category
         </button>
       </div>
@@ -34,28 +75,12 @@ function Outputs() {
             <th>total</th>
 
             <th>catagory</th>
-            <th>update</th>
+            <th>Count</th>
+            {/* <th>update</th> */}
             <th>delete</th>
           </tr>
         </thead>
-        <tbody id="tbody">
-          <tr>
-            <td>fsdsfd</td>
-            <td>dsssefr</td>
-            <td>dsssefr</td>
-            <td>dsssefr</td>
-            <td>dsssefr</td>
-            <td>dsssefr</td>
-            <td>dsssefr</td>
-            <td>dsssefr</td>
-            <td>
-              <button id="update">update</button>
-            </td>
-            <td>
-              <button id="delete">delete</button>
-            </td>
-          </tr>
-        </tbody>
+        <tbody id="tbody">{product}</tbody>
       </table>
     </div>
   );

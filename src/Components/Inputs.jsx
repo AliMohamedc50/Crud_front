@@ -15,6 +15,16 @@ function Inputs() {
         setTotal(calculatedTotal);
       }, [price, texes, ads, discount]);
 
+      const post = () => {
+        const data = {
+          price,
+          texes,
+          ads,
+          discount,
+          total,
+        };
+        return JSON.parse(data);
+      }
 
 
   return (
@@ -74,7 +84,11 @@ function Inputs() {
         type="text"
         id="categore"
       />
-      <button className="bg-teal-800 text-xl rounded-md  mb-3" id="submit">
+      <button
+        onClick={() => console.log(post())}
+        className="bg-teal-800 text-xl rounded-md  mb-3 p-1"
+        id="submit"
+      >
         create
       </button>
     </div>
