@@ -20,8 +20,11 @@ function Inputs() {
     setTotal(calculatedTotal);
   }, [price, texes, ads, discount]);
 
-  const getData = () => {
-    if (title != "" && price != "") {
+  const getData = (e) => {
+    e.preventDefault()
+
+    if (title && categore && price && texes && ads && discount && count) {
+    // if (title) {
       const data = {
         title,
         categore,
@@ -32,12 +35,20 @@ function Inputs() {
         total,
         count,
       };
-      return data;
+      // return data;
+      dispatch(insertProduct(data));
+    }else {
+      console.log("fdgfrdgg")
     }
+
+
+
   };
 
+  // console.log(Boolean(title));
+
   return (
-    <div className="inputs">
+    <form className="inputs" onSubmit={getData}>
       <input
         value={title}
         onChange={(e) => setTitle(e.target.value)}
@@ -100,13 +111,13 @@ function Inputs() {
         id="categore"
       />
       <button
-        onClick={() => dispatch(insertProduct(getData()))}
+        type="submit"
         className="bg-teal-800 text-xl rounded-md  mb-3 p-1"
         id="submit"
       >
         create
       </button>
-    </div>
+    </form>
   );
 }
 
