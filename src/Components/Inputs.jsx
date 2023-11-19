@@ -1,35 +1,46 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { insertProduct } from "../Store/SliceProducts";
 
 function Inputs() {
+  const dispatch = useDispatch();
 
-        const [price, setPrice] = useState("");
-        const [texes, setTexes] = useState("");
-        const [ads, setAds] = useState("");
-        const [discount, setDiscount] = useState("");
-        const [total, setTotal] = useState("");
+  const [title, setTitle] = useState("");
+  const [categore, setCategore] = useState("");
+  const [price, setPrice] = useState("");
+  const [texes, setTexes] = useState("");
+  const [ads, setAds] = useState("");
+  const [discount, setDiscount] = useState("");
+  const [total, setTotal] = useState("");
+  const [count, setCount] = useState("");
 
-      useEffect(() => {
-        // console.log(price);
-        const calculatedTotal = +price + +texes + +ads - +discount;
-        setTotal(calculatedTotal);
-      }, [price, texes, ads, discount]);
+  useEffect(() => {
+    const calculatedTotal = +price + +texes + +ads - +discount;
+    setTotal(calculatedTotal);
+  }, [price, texes, ads, discount]);
 
-      const post = () => {
-        const data = {
-          price,
-          texes,
-          ads,
-          discount,
-          total,
-        };
-        return JSON.parse(data);
-      }
-
+  const getData = () => {
+    if (title != "" && price != "") {
+      const data = {
+        title,
+        categore,
+        price,
+        texes,
+        ads,
+        discount,
+        total,
+        count,
+      };
+      return data;
+    }
+  };
 
   return (
     <div className="inputs">
       <input
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
         className="my-1 px-3 py-5 rounded-md"
         placeholder="title"
         type="text"
@@ -73,19 +84,23 @@ function Inputs() {
         </small>
       </div>
       <input
+        value={count}
+        onChange={(e) => setCount(e.target.value)}
         className="py-5 px-3 rounded-md  my-1"
         type="number"
         id="count"
         placeholder="count"
       />
       <input
+        value={categore}
+        onChange={(e) => setCategore(e.target.value)}
         className="py-5 px-3 rounded-md  my-1"
         placeholder="categore"
         type="text"
         id="categore"
       />
       <button
-        onClick={() => console.log(post())}
+        onClick={() => dispatch(insertProduct(getData()))}
         className="bg-teal-800 text-xl rounded-md  mb-3 p-1"
         id="submit"
       >
@@ -95,4 +110,4 @@ function Inputs() {
   );
 }
 
-export default Inputs
+export default Inputs;

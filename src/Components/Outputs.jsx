@@ -23,9 +23,9 @@ function Outputs() {
           <td>{product.total}</td>
           <td>{product.categore}</td>
           <td>{product.count}</td>
-          {/* <td>
+          <td>
             <button className='bg-red-600 hover:bg-red-900 text-xl rounded-md  p-1' id="update">update</button>
-          </td> */}
+          </td>
           <td>
             <button
               className="bg-red-600 hover:bg-red-900 text-xl rounded-md  p-1"
@@ -76,7 +76,7 @@ function Outputs() {
 
             <th>catagory</th>
             <th>Count</th>
-            {/* <th>update</th> */}
+            <th>update</th>
             <th>delete</th>
           </tr>
         </thead>
