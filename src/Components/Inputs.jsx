@@ -35,8 +35,16 @@ function Inputs() {
         total,
         count,
       };
-      // return data;
       dispatch(insertProduct(data));
+      setTitle("")
+      setCategore("")
+      setPrice("")
+      setTexes("")
+      setAds("")
+      setDiscount("")
+      setTotal("")
+      setCount("")
+      
     }else {
       console.log("fdgfrdgg")
     }

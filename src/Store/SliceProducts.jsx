@@ -33,30 +33,30 @@ export const insertProduct = createAsyncThunk(
       return rejectWithValue(error.message)
     }
   }
-);
+  );
 
-// export const postProduct = createAsyncThunk(
-//   "products/postProduct",
-//   async (element, thunkAPI) => {
-//     const { rejectWithValue } = thunkAPI;
-//     try {
-//       await fetch(`http://localhost:3003/heros/${element.id}`, {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json; charset=utf-8",
-//         },
-//       });
-//       return element;
-//     } catch (error) {
-//       return rejectWithValue(error.message);
-//     }
-//   }
-// );
+
+  export const deleteProduct = createAsyncThunk(
+    "products/deleteProduct",
+    async (id, thunkAPI) => {
+      const { rejectWithValue } = thunkAPI;
+      try {
+        await fetch(`http://localhost:6004/product/${id}`, {
+          method: "DELETE",
+        });
+        return id;
+      } catch (error) {
+        return rejectWithValue(error.message);
+      }
+    }
+  );
+
+
 
 const productSlice = createSlice({
   name: "products",
-  initialState: { getProduct: [], loading: false },
-
+  initialState: { getProduct: [], loading: false},
+  
   extraReducers: {
     [getProductApi.pending]: (state, action) => {
       state.loading = true;
@@ -67,19 +67,35 @@ const productSlice = createSlice({
     },
     [getProductApi.rejected]: (state, action) => {
       state.loading = false;
+      state.error = action.payload
+      console.log(state.error);
     },
 
 
 
 
+    // insert Product
     [insertProduct.pending]: (state, action) => {
       state.loading = true;
     },
     [insertProduct.fulfilled]: (state, action) => {
-      // state.getProduct.push(...action.payload);
-      console.log(action.payload);
+      state.getProduct.push(action.payload);
     },
     [insertProduct.rejected]: (state, action) => {
+      state.loading = false;
+      
+    },
+
+
+
+    // insertProduct
+    [deleteProduct.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [deleteProduct.fulfilled]: (state, action) => {
+      state.getProduct = state.getProduct.filter((ele) => ele.id !== action.payload)
+    },
+    [deleteProduct.rejected]: (state, action) => {
       state.loading = false;
     },
   },

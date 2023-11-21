@@ -1,20 +1,19 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import { useSelector } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteProduct } from '../Store/SliceProducts';
 function Outputs() {
 
 
-
-      const { getProduct } = useSelector((state) => state.productSlice);
-    //   console.log(getProduct);
+  const dispatch = useDispatch();
+  const { getProduct } = useSelector((state) => state.productSlice);
 
 
     const product =
       getProduct &&
-      getProduct.map((product) => (
+      getProduct.map((product, i) => (
         <tr key={product.id} className="border-y-2 border-slate-400 ">
-          <td>{product.id}</td>
+          <td>{++i}</td>
           <td>{product.title}</td>
           <td>{product.price}</td>
           <td>{product.texes}</td>
@@ -24,10 +23,16 @@ function Outputs() {
           <td>{product.categore}</td>
           <td>{product.count}</td>
           <td>
-            <button className='bg-red-600 hover:bg-red-900 text-xl rounded-md  p-1' id="update">update</button>
+            <button
+              className="bg-red-600 hover:bg-red-900 text-xl rounded-md  p-1"
+              id="update"
+            >
+              update
+            </button>
           </td>
           <td>
             <button
+              onClick={() => dispatch(deleteProduct(product.id))}
               className="bg-red-600 hover:bg-red-900 text-xl rounded-md  p-1"
               id="delete"
             >
