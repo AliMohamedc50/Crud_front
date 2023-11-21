@@ -1,10 +1,14 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { insertProduct } from "../Store/SliceProducts";
 
 function Inputs() {
+
   const dispatch = useDispatch();
+  const { updateData } = useSelector((state) => state.productSlice);
+
+
 
   const [title, setTitle] = useState("");
   const [categore, setCategore] = useState("");
@@ -20,11 +24,13 @@ function Inputs() {
     setTotal(calculatedTotal);
   }, [price, texes, ads, discount]);
 
+
+
+  // let updateData = false;
+
   const getData = (e) => {
     e.preventDefault()
-
     if (title && categore && price && texes && ads && discount && count) {
-    // if (title) {
       const data = {
         title,
         categore,
@@ -36,27 +42,29 @@ function Inputs() {
         count,
       };
       dispatch(insertProduct(data));
-      setTitle("")
-      setCategore("")
-      setPrice("")
-      setTexes("")
-      setAds("")
-      setDiscount("")
-      setTotal("")
-      setCount("")
-      
+
+        setCategore("")
+        setTitle("")
+        setPrice("")
+        setTexes("")
+        setAds("")
+        setDiscount("")
+        setTotal("")
+        setCount("")
+
     }else {
       console.log("fdgfrdgg")
     }
-
-
-
   };
 
-  // console.log(Boolean(title));
+  const update = (e) => {
+    e.preventDefault();
+    console.log("update")
+  }
 
   return (
-    <form className="inputs" onSubmit={getData}>
+    <form className="inputs" onSubmit={updateData ? getData : update}>
+    {/* <form className="inputs"> */}
       <input
         value={title}
         onChange={(e) => setTitle(e.target.value)}
@@ -118,13 +126,21 @@ function Inputs() {
         type="text"
         id="categore"
       />
-      <button
-        type="submit"
-        className="bg-teal-800 text-xl rounded-md  mb-3 p-1"
-        id="submit"
-      >
-        create
-      </button>
+      {updateData ? (
+        <button
+          // onClick={update}
+
+          type="submit"
+          className="bg-teal-800 text-xl rounded-md  mb-3 p-1"
+          id="submit"
+        >
+          create
+        </button>
+      ) : (
+        <button className="bg-teal-800 text-xl rounded-md  mb-3 p-1">
+          update
+        </button>
+      )}
     </form>
   );
 }

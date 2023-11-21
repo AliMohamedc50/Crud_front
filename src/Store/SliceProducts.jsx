@@ -55,8 +55,8 @@ export const insertProduct = createAsyncThunk(
 
 const productSlice = createSlice({
   name: "products",
-  initialState: { getProduct: [], loading: false},
-  
+  initialState: { getProduct: [], loading: false, updateData : true},
+  reducers: [],
   extraReducers: {
     [getProductApi.pending]: (state, action) => {
       state.loading = true;
@@ -67,12 +67,9 @@ const productSlice = createSlice({
     },
     [getProductApi.rejected]: (state, action) => {
       state.loading = false;
-      state.error = action.payload
+      state.error = action.payload;
       console.log(state.error);
     },
-
-
-
 
     // insert Product
     [insertProduct.pending]: (state, action) => {
@@ -83,17 +80,16 @@ const productSlice = createSlice({
     },
     [insertProduct.rejected]: (state, action) => {
       state.loading = false;
-      
     },
-
-
 
     // insertProduct
     [deleteProduct.pending]: (state, action) => {
       state.loading = true;
     },
     [deleteProduct.fulfilled]: (state, action) => {
-      state.getProduct = state.getProduct.filter((ele) => ele.id !== action.payload)
+      state.getProduct = state.getProduct.filter(
+        (ele) => ele.id !== action.payload
+      );
     },
     [deleteProduct.rejected]: (state, action) => {
       state.loading = false;
