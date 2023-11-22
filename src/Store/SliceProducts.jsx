@@ -16,6 +16,8 @@ export const getProductApi = createAsyncThunk(
   }
 );
 
+
+// insert Product to json
 export const insertProduct = createAsyncThunk(
   "products/insertProduct",
   async (item, thunkAPI) => {
@@ -36,6 +38,9 @@ export const insertProduct = createAsyncThunk(
   );
 
 
+
+
+// delete Product to json
   export const deleteProduct = createAsyncThunk(
     "products/deleteProduct",
     async (id, thunkAPI) => {
@@ -53,10 +58,37 @@ export const insertProduct = createAsyncThunk(
 
 
 
+  // Update Product in json
+  export const updateProduct = createAsyncThunk(
+    "products/updateProduct",
+    async ( product , thunkAPI) => {
+      const { rejectWithValue } = thunkAPI;
+      try {
+        await fetch(`http://localhost:6004/product/${product.id}`, {
+          method: "PUT",
+          body: JSON.stringify(product),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        return  product ;
+      } catch (error) {
+        return rejectWithValue(error.message);
+      }
+    }
+  );
+
+
 const productSlice = createSlice({
   name: "products",
-  initialState: { getProduct: [], loading: false, updateData : true},
-  reducers: [],
+  initialState: { getProduct: [], loading: false, updateData: true , holdeProductUpdate: []  },
+  reducers: {
+    toggleUpdateData : (state, action) => {
+      state.updateData = !state.updateData;
+      state.holdeProductUpdate = action.payload
+      console.log(action.payload)
+    }
+  },
   extraReducers: {
     [getProductApi.pending]: (state, action) => {
       state.loading = true;
@@ -82,6 +114,19 @@ const productSlice = createSlice({
       state.loading = false;
     },
 
+
+    // Update Product
+    [updateProduct.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [updateProduct.fulfilled]: (state, action) => {
+      // state.getProduct.push(action.payload);
+      console.log(action.payload)
+    },
+    [updateProduct.rejected]: (state, action) => {
+      state.loading = false;
+    },
+
     // insertProduct
     [deleteProduct.pending]: (state, action) => {
       state.loading = true;
@@ -98,3 +143,4 @@ const productSlice = createSlice({
 });
 
 export default productSlice.reducer;
+export const { toggleUpdateData } = productSlice.actions;

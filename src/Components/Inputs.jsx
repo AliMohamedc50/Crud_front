@@ -1,15 +1,21 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { insertProduct } from "../Store/SliceProducts";
+import { insertProduct, toggleUpdateData, updateProduct } from "../Store/SliceProducts";
+
+
+
 
 function Inputs() {
 
   const dispatch = useDispatch();
-  const { updateData } = useSelector((state) => state.productSlice);
+  const { updateData, holdeProductUpdate } = useSelector(
+    (state) => state.productSlice
+  );
 
 
-
+  // const [id, setId] = useState(0);
   const [title, setTitle] = useState("");
   const [categore, setCategore] = useState("");
   const [price, setPrice] = useState("");
@@ -19,14 +25,14 @@ function Inputs() {
   const [total, setTotal] = useState("");
   const [count, setCount] = useState("");
 
+  
+  
+
   useEffect(() => {
     const calculatedTotal = +price + +texes + +ads - +discount;
     setTotal(calculatedTotal);
   }, [price, texes, ads, discount]);
 
-
-
-  // let updateData = false;
 
   const getData = (e) => {
     e.preventDefault()
@@ -43,28 +49,70 @@ function Inputs() {
       };
       dispatch(insertProduct(data));
 
-        setCategore("")
-        setTitle("")
-        setPrice("")
-        setTexes("")
-        setAds("")
-        setDiscount("")
-        setTotal("")
-        setCount("")
-
+      setCategore("")
+      setTitle("")
+      setPrice("")
+      setTexes("")
+      setAds("")
+      setDiscount("")
+      setTotal("")
+      setCount("")
+      
     }else {
       console.log("fdgfrdgg")
     }
   };
 
+  
+  
+
+  useEffect(() => {
+    if (!updateData) {
+      setTitle(holdeProductUpdate.title);
+      setCategore(holdeProductUpdate.categore);
+      setPrice(holdeProductUpdate.price);
+      setTexes(holdeProductUpdate.texes);
+      setAds(holdeProductUpdate.ads);
+      setDiscount(holdeProductUpdate.discount);
+      setCount(holdeProductUpdate.count);
+      // setId(holdeProductUpdate.id);
+    }else {
+      // setId(null)
+      setCategore("");
+      setTitle("");
+      setPrice("");
+      setTexes("");
+      setAds("");
+      setDiscount("");
+      setTotal("");
+      setCount("");
+    }
+    
+  },[updateData])
   const update = (e) => {
     e.preventDefault();
-    console.log("update")
-  }
+    if (title && categore && price && texes && ads && discount && count) {
+      const data = {
+        title,
+        id: holdeProductUpdate.id,
+        categore,
+        price,
+        texes,
+        ads,
+        discount,
+        total,
+        count,
+      };
+      // const jsonData = JSON.stringify(data);
+      dispatch(updateProduct(data));
+      // console.log(data.id);
+    }
 
+  }
+  
   return (
     <form className="inputs" onSubmit={updateData ? getData : update}>
-    {/* <form className="inputs"> */}
+      <input type="number"  />
       <input
         value={title}
         onChange={(e) => setTitle(e.target.value)}

@@ -1,13 +1,20 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteProduct } from '../Store/SliceProducts';
+import { deleteProduct, toggleUpdateData } from '../Store/SliceProducts';
+
 function Outputs() {
 
 
   const dispatch = useDispatch();
   const { getProduct } = useSelector((state) => state.productSlice);
 
+
+
+  // send data to store for update
+  const handelUpdateData = (product) => {
+    dispatch(toggleUpdateData(product));
+  }
 
     const product =
       getProduct &&
@@ -24,6 +31,7 @@ function Outputs() {
           <td>{product.count}</td>
           <td>
             <button
+              onClick={() => handelUpdateData(product)}
               className="bg-red-600 hover:bg-red-900 text-xl rounded-md  p-1"
               id="update"
             >
