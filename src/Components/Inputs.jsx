@@ -14,8 +14,6 @@ function Inputs() {
     (state) => state.productSlice
   );
 
-
-  // const [id, setId] = useState(0);
   const [title, setTitle] = useState("");
   const [categore, setCategore] = useState("");
   const [price, setPrice] = useState("");
@@ -25,8 +23,7 @@ function Inputs() {
   const [total, setTotal] = useState("");
   const [count, setCount] = useState("");
 
-  
-  
+
 
   useEffect(() => {
     const calculatedTotal = +price + +texes + +ads - +discount;
@@ -37,6 +34,7 @@ function Inputs() {
   const getData = (e) => {
     e.preventDefault()
     if (title && categore && price && texes && ads && discount && count) {
+      dispatch(toggleUpdateData(""));
       const data = {
         title,
         categore,
@@ -62,9 +60,6 @@ function Inputs() {
       console.log("fdgfrdgg")
     }
   };
-
-  
-  
 
   useEffect(() => {
     if (!updateData) {
@@ -92,6 +87,7 @@ function Inputs() {
   const update = (e) => {
     e.preventDefault();
     if (title && categore && price && texes && ads && discount && count) {
+      dispatch(toggleUpdateData(""));
       const data = {
         title,
         id: holdeProductUpdate.id,
@@ -103,16 +99,20 @@ function Inputs() {
         total,
         count,
       };
-      // const jsonData = JSON.stringify(data);
       dispatch(updateProduct(data));
-      // console.log(data.id);
+      setCategore("");
+      setTitle("");
+      setPrice("");
+      setTexes("");
+      setAds("");
+      setDiscount("");
+      setTotal("");
+      setCount("");
     }
-
   }
   
   return (
     <form className="inputs" onSubmit={updateData ? getData : update}>
-      <input type="number"  />
       <input
         value={title}
         onChange={(e) => setTitle(e.target.value)}
