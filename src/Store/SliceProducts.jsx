@@ -2,6 +2,7 @@
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+
 export const getProductApi = createAsyncThunk(
   "products/getProductApi",
   async (_, thunkAPI) => {
@@ -104,7 +105,7 @@ const productSlice = createSlice({
   },
   extraReducers: {
 
-    
+
     [getProductApi.pending]: (state, action) => {
       state.loading = true;
     },
