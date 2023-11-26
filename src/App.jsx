@@ -7,7 +7,8 @@ import Inputs from "./Components/Inputs";
 import { useEffect } from "react";
 import { getProductApi } from "./Store/SliceProducts";
 import Outputs from "./Components/Outputs";
-// useRef
+import SearchProduct from "./Components/searchProduct";
+
 function App() {
 
   const dispach = useDispatch()
@@ -20,6 +21,7 @@ function App() {
       <div className="crud">
         <Header />
         <Inputs />
+        <SearchProduct />
         <Outputs />
       </div>
     </>

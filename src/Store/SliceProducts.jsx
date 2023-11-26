@@ -56,22 +56,30 @@ export const insertProduct = createAsyncThunk(
     }
   );
 
-
-
   // Update Product in json
   export const updateProduct = createAsyncThunk(
     "products/updateProduct",
     async ( product , thunkAPI) => {
       const { rejectWithValue } = thunkAPI;
       try {
-        await fetch(`http://localhost:6004/product/${product.id}`, {
-          method: "PUT",
-          body: JSON.stringify(product),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        await fetch(`http://localhost:6004/product/${product.id}`);
         return  product ;
+      } catch (error) {
+        return rejectWithValue(error.message);
+      }
+    }
+  );
+
+
+  // search by Title
+  export const searchTitle = createAsyncThunk(
+    "products/updateProduct",
+    async ( title , thunkAPI) => {
+      const { rejectWithValue } = thunkAPI;
+      try {
+        const res = await fetch(`http://localhost:6004/product?title_like=${title}`);
+        const data = await res.json();
+        return  data;
       } catch (error) {
         return rejectWithValue(error.message);
       }
@@ -81,15 +89,22 @@ export const insertProduct = createAsyncThunk(
 
 const productSlice = createSlice({
   name: "products",
-  initialState: { getProduct: [], loading: false, updateData: true , holdeProductUpdate: []  },
+  initialState: {
+    getProduct: [],
+    loading: false,
+    updateData: true,
+    holdeProductUpdate: [],
+  },
   reducers: {
-    toggleUpdateData : (state, action) => {
+    toggleUpdateData: (state, action) => {
       state.updateData = !state.updateData;
-      state.holdeProductUpdate = action.payload
-      console.log(action.payload)
-    }
+      state.holdeProductUpdate = action.payload;
+      console.log(action.payload);
+    },
   },
   extraReducers: {
+
+    
     [getProductApi.pending]: (state, action) => {
       state.loading = true;
     },
@@ -114,14 +129,13 @@ const productSlice = createSlice({
       state.loading = false;
     },
 
-
     // Update Product
     [updateProduct.pending]: (state, action) => {
       state.loading = true;
     },
     [updateProduct.fulfilled]: (state, action) => {
-      // state.getProduct.push(action.payload);
-      console.log(action.payload)
+      state.getProduct.push(action.payload);
+      console.log(action.payload);
     },
     [updateProduct.rejected]: (state, action) => {
       state.loading = false;
@@ -138,6 +152,22 @@ const productSlice = createSlice({
     },
     [deleteProduct.rejected]: (state, action) => {
       state.loading = false;
+    },
+
+
+
+    // Search by Title
+    [searchTitle.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [searchTitle.fulfilled]: (state, action) => {
+      state.getProduct = action.payload;
+      // console.log(state.getProduct);
+    },
+    [searchTitle.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+      console.log(state.error);
     },
   },
 });

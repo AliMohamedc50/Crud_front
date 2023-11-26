@@ -111,6 +111,7 @@ function Inputs() {
     }
   }
   
+
   return (
     <form className="inputs" onSubmit={updateData ? getData : update}>
       <input

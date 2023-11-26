@@ -14,11 +14,10 @@ function Outputs() {
   // send data to store for update
   const handelUpdateData = (product) => {
     dispatch(toggleUpdateData(product));
+    console.log(product.id);
   }
 
-    const product =
-      getProduct &&
-      getProduct.map((product, i) => (
+    const product =  getProduct?.map((product, i) => (
         <tr key={product.id} className="border-y-2 border-slate-400 ">
           <td>{++i}</td>
           <td>{product.title}</td>
@@ -58,22 +57,6 @@ function Outputs() {
 
   return (
     <div className="outputs">
-      <div className="searchBlock">
-        <input
-          className="py-5 px-3 rounded-md"
-          type="text"
-          placeholder="search"
-          id="search"
-        />
-      </div>
-      <div className="btnSearch">
-        <button className="bg-teal-800 m-1 p-2" id="searchTitle">
-          Search By Title
-        </button>
-        <button className="bg-teal-800 m-1 p-2" id="searchCategory">
-          Search By Category
-        </button>
-      </div>
       <div id="deleteAll"></div>
       <table>
         <thead>
