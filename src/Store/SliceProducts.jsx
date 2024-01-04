@@ -60,27 +60,43 @@ export const insertProduct = createAsyncThunk(
   // Update Product in json
   export const updateProduct = createAsyncThunk(
     "products/updateProduct",
-    async ( product , thunkAPI) => {
+    async (product, thunkAPI) => {
       const { rejectWithValue } = thunkAPI;
       try {
-        await fetch(`http://localhost:6004/product/${product.id}`);
-        return  product ;
+        const response = await fetch(
+          `http://localhost:6004/product/${product.id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(product),
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to update product");
+        }
+
+        const updatedProduct = await response.json();
+        return updatedProduct;
       } catch (error) {
         return rejectWithValue(error.message);
       }
     }
-  );
-
+ );
 
   // search by Title
   export const searchTitle = createAsyncThunk(
-    "products/updateProduct",
-    async ( title , thunkAPI) => {
+    "products/searchTitle",
+    async (title, thunkAPI) => {
       const { rejectWithValue } = thunkAPI;
       try {
-        const res = await fetch(`http://localhost:6004/product?title_like=${title}`);
+        const res = await fetch(
+          `http://localhost:6004/product?title_like=${title}`
+        );
         const data = await res.json();
-        return  data;
+        return data;
       } catch (error) {
         return rejectWithValue(error.message);
       }
@@ -100,7 +116,7 @@ const productSlice = createSlice({
     toggleUpdateData: (state, action) => {
       state.updateData = !state.updateData;
       state.holdeProductUpdate = action.payload;
-      console.log(action.payload);
+      // console.log(state.holdeProductUpdate.title);
     },
   },
   extraReducers: {

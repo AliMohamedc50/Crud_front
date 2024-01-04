@@ -34,7 +34,7 @@ function Inputs() {
   const getData = (e) => {
     e.preventDefault()
     if (title && categore && price && texes && ads && discount && count) {
-      dispatch(toggleUpdateData(""));
+      // dispatch(toggleUpdateData(""));
       const data = {
         title,
         categore,
@@ -85,7 +85,8 @@ function Inputs() {
     
   },[updateData])
   const update = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
+    
     if (title && categore && price && texes && ads && discount && count) {
       dispatch(toggleUpdateData(""));
       const data = {
@@ -178,7 +179,6 @@ function Inputs() {
       {updateData ? (
         <button
           // onClick={update}
-
           type="submit"
           className="bg-teal-800 text-xl rounded-md  mb-3 p-1"
           id="submit"

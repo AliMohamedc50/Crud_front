@@ -5,7 +5,6 @@ import { searchTitle } from "../Store/SliceProducts";
 const SearchProduct = () => {
 
   const dispatch = useDispatch();
-//   const { getProduct } = useSelector((state) => state.productSlice);
   const handleSearchtitle = (title) => {
     dispatch(searchTitle(title));
     // console.log(title);
@@ -13,8 +12,6 @@ const SearchProduct = () => {
   const sdfsdaf = (e) => {
     console.log(e.target.style.background = 'red')
   }
-
-
 
   return (
     <>
