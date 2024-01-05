@@ -34,19 +34,17 @@ input:focus {
   background-color: #000;
 }
 
-.price input {
-  width: 20%;
+.price  {
+  display: flex;
+  flex-wrap: nowrap;
 }
 
 #total {
+  width: 200px;
   background-color: #7a2a2a;
-  /* padding: 4px 2px; */
-  /* border-radius: 4px; */
 }
 
-#total::before {
-  content: "total: ";
-}
+
 
 button {
   width: 100%;
@@ -84,4 +82,15 @@ table th {
 th,
 td {
   padding: 5px;
+}
+
+
+@media (max-width: 767px) {
+  .price {
+    display: block;
+  }
+  .price input {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }

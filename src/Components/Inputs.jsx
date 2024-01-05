@@ -115,67 +115,18 @@ function Inputs() {
 
   return (
     <form className="inputs" onSubmit={updateData ? getData : update}>
-      <input
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        className="my-1 px-3 py-5 rounded-md"
-        placeholder="title"
-        type="text"
-        id="title"
-      />
+      <input value={title} onChange={(e) => setTitle(e.target.value)} className="my-1 px-3 py-5 rounded-md" placeholder="title" type="text" id="title"/>
       <div className="price">
-        <input
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-          className="py-5 px-3 rounded-md  my-1 "
-          type="number"
-          id="price"
-          placeholder="price"
-        />
-        <input
-          value={texes}
-          onChange={(e) => setTexes(e.target.value)}
-          className="py-5 px-3 rounded-md mx-1 my-1"
-          type="number"
-          id="texes"
-          placeholder="texes"
-        />
-        <input
-          value={ads}
-          onChange={(e) => setAds(e.target.value)}
-          className="py-5 px-3 rounded-md mx-1 my-1"
-          type="number"
-          id="ads"
-          placeholder="ads"
-        />
-        <input
-          value={discount}
-          onChange={(e) => setDiscount(e.target.value)}
-          className="py-5 px-3 rounded-md mx-1 my-1"
-          type="number"
-          id="discount"
-          placeholder="discount"
-        />
-        <small className="p-3 rounded-md mx-1 my-1" id="total">
-          {total}
-        </small>
+        <input value={price} onChange={(e) => setPrice(e.target.value)} className="py-5 px-3 rounded-md  my-1 " type="number" id="price" placeholder="price"/>
+        <input value={texes} onChange={(e) => setTexes(e.target.value)} className="py-5 px-3 rounded-md mx-1 my-1" type="number" id="texes" placeholder="texes"/>
+        <input value={ads} onChange={(e) => setAds(e.target.value)} className="py-5 px-3 rounded-md mx-1 my-1" type="number" id="ads" placeholder="ads"/>
+        <input value={discount} onChange={(e) => setDiscount(e.target.value)} className="py-5 px-3 rounded-md mx-1 my-1" type="number" id="discount" placeholder="discount"/>
+        <h5 className="p-3 rounded-md mx-1 my-1 " id="total">
+           To: {total}
+        </h5>
       </div>
-      <input
-        value={count}
-        onChange={(e) => setCount(e.target.value)}
-        className="py-5 px-3 rounded-md  my-1"
-        type="number"
-        id="count"
-        placeholder="count"
-      />
-      <input
-        value={categore}
-        onChange={(e) => setCategore(e.target.value)}
-        className="py-5 px-3 rounded-md  my-1"
-        placeholder="categore"
-        type="text"
-        id="categore"
-      />
+      <input value={count} onChange={(e) => setCount(e.target.value)} className="py-5 px-3 rounded-md  my-1" type="number" id="count" placeholder="count"/>
+      <input value={categore} onChange={(e) => setCategore(e.target.value)} className="py-5 px-3 rounded-md  my-1" placeholder="categore" type="text" id="categore"/>
       {updateData ? (
         <button
           // onClick={update}
