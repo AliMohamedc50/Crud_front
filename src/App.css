@@ -40,11 +40,8 @@ input:focus {
 }
 
 #total {
-  width: 200px;
   background-color: #7a2a2a;
 }
-
-
 
 button {
   width: 100%;
@@ -61,15 +58,6 @@ button:hover {
   background-color: #006e81;
 }
 
-.btnSearch {
-  display: flex;
-  justify-content: space-between;
-}
-
-.btnSearch button {
-  width: 45%;
-}
-
 table {
   width: 100%;
   text-align: center;
@@ -83,7 +71,6 @@ th,
 td {
   padding: 5px;
 }
-
 
 @media (max-width: 767px) {
   .price {

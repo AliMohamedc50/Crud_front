@@ -5,16 +5,12 @@ import { deleteProduct, toggleUpdateData } from '../Store/SliceProducts';
 
 function Outputs() {
 
-
   const dispatch = useDispatch();
   const { getProduct } = useSelector((state) => state.productSlice);
 
-
-
-  // send data to store for update
+  //? send data to store for update
   const handelUpdateData = (product) => {
     dispatch(toggleUpdateData(product));
-    // console.log(product.id);
   }
 
     const product =  getProduct?.map((product, i) => (

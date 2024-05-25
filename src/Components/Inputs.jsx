@@ -4,9 +4,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { insertProduct, toggleUpdateData, updateProduct } from "../Store/SliceProducts";
 
-
-
-
 function Inputs() {
 
   const dispatch = useDispatch();

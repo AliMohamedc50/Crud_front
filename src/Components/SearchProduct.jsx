@@ -7,11 +7,8 @@ const SearchProduct = () => {
   const dispatch = useDispatch();
   const handleSearchtitle = (title) => {
     dispatch(searchTitle(title));
-    // console.log(title);
   }
-  const sdfsdaf = (e) => {
-    console.log(e.target.style.background = 'red')
-  }
+
 
   return (
     <>
@@ -23,14 +20,6 @@ const SearchProduct = () => {
           placeholder="search"
           id="search"
         />
-      </div>
-      <div className="btnSearch">
-        <button  onClick={(e) => sdfsdaf(e)} className="bg-teal-800 m-1 p-2" id="searchTitle">
-          Search By Title
-        </button>
-        <button onClick={(e) => sdfsdaf(e)} className="bg-teal-800 m-1 p-2" id="searchCategory">
-          Search By Category
-        </button>
       </div>
     </>
   );
